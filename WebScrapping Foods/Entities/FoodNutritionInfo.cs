@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WebScrapping_Foods.Models;
+namespace WebScrapping_Foods.Entities;
 
 public partial class FoodNutritionInfo
 {
@@ -11,11 +11,15 @@ public partial class FoodNutritionInfo
 
     public long IdUnitMeasurement { get; set; }
 
-    public long? Quantity { get; set; }
+    public double? Quantity { get; set; }
 
     public long? IdNutritionalComposition { get; set; }
 
-    public virtual ICollection<Food> Foods { get; set; } = new List<Food>();
+    public long? IdFood { get; set; }
+
+    public virtual Food IdFoodNavigation { get; set; }
 
     public virtual NutritionalComposition IdNutritionalCompositionNavigation { get; set; }
+
+    public virtual UnitMeasurement IdUnitMeasurementNavigation { get; set; }
 }

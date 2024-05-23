@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WebScrapping_Foods.Models;
+namespace WebScrapping_Foods.Entities;
 
 public partial class Food
 {
@@ -11,15 +11,13 @@ public partial class Food
 
     public string Name { get; set; }
 
-    public double Quantity { get; set; }
-
-    public long? IdFoodNutritionInfo { get; set; }
-
     public long? IdFoodGroup { get; set; }
 
     public string ReferenceTable { get; set; }
 
-    public virtual FoodGroup IdFoodGroupNavigation { get; set; }
+    public string Brand { get; set; }
 
-    public virtual FoodNutritionInfo IdFoodNutritionInfoNavigation { get; set; }
+    public virtual ICollection<FoodNutritionInfo> FoodNutritionInfos { get; set; } = new List<FoodNutritionInfo>();
+
+    public virtual FoodGroup IdFoodGroupNavigation { get; set; }
 }

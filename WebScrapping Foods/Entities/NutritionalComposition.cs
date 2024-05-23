@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WebScrapping_Foods.Models;
+namespace WebScrapping_Foods.Entities;
 
 public partial class NutritionalComposition
 {

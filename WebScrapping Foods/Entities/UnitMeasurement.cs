@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace WebScrapping_Foods.Entities;
 
-public partial class FoodGroup
+public partial class UnitMeasurement
 {
     public long Id { get; set; }
 
     public string Name { get; set; }
 
-    public virtual ICollection<Food> Foods { get; set; } = new List<Food>();
+    public virtual ICollection<FoodNutritionInfo> FoodNutritionInfos { get; set; } = new List<FoodNutritionInfo>();
 }

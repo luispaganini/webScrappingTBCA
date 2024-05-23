@@ -12,7 +12,7 @@
    "ProjectRootNamespace": "WebScrapping_Foods",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 2,
-   "SelectedToBeGenerated": 0,
+   "SelectedToBeGenerated": 1,
    "T4TemplatePath": null,
    "Tables": [
       {
@@ -29,6 +29,10 @@
       },
       {
          "Name": "[dbo].[nutritionalComposition]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[unitMeasurement]",
          "ObjectType": 0
       }
    ],

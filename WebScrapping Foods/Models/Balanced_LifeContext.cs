@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using WebScrapping_Foods.Entities;
 
 namespace WebScrapping_Foods.Models;
 
@@ -21,6 +22,20 @@ public partial class Balanced_LifeContext : DbContext
 
     public virtual DbSet<NutritionalComposition> NutritionalCompositions { get; set; }
 
+    public virtual DbSet<UnitMeasurement> UnitMeasurements { get; set; }
+
+    public async Task<List<FoodGroup>> GetAllGroupsAsync() {
+        return await FoodGroups.ToListAsync();
+    }
+
+    public async Task<NutritionalComposition> GetCompositionByNameAsync(string name) {
+        return await NutritionalCompositions.FirstOrDefaultAsync(g => g.Item == name);
+    }
+
+    public async Task<UnitMeasurement> GetUnitMeasurementByNameAsync(string name) {
+        return await UnitMeasurements.FirstOrDefaultAsync(g => g.Name == name);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Food>(entity =>
@@ -30,26 +45,24 @@ public partial class Balanced_LifeContext : DbContext
             entity.ToTable("food");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Brand)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("brand");
             entity.Property(e => e.IdFoodGroup).HasColumnName("idFoodGroup");
-            entity.Property(e => e.IdFoodNutritionInfo).HasColumnName("idFoodNutritionInfo");
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("name");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.ReferenceTable)
-                .HasMaxLength(1)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("referenceTable");
 
             entity.HasOne(d => d.IdFoodGroupNavigation).WithMany(p => p.Foods)
                 .HasForeignKey(d => d.IdFoodGroup)
                 .HasConstraintName("food_idfoodgroup_foreign");
-
-            entity.HasOne(d => d.IdFoodNutritionInfoNavigation).WithMany(p => p.Foods)
-                .HasForeignKey(d => d.IdFoodNutritionInfo)
-                .HasConstraintName("food_idfoodnutritioninfo_foreign");
         });
 
         modelBuilder.Entity<FoodGroup>(entity =>
@@ -72,13 +85,23 @@ public partial class Balanced_LifeContext : DbContext
             entity.ToTable("foodNutritionInfo");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.IdFood).HasColumnName("idFood");
             entity.Property(e => e.IdNutritionalComposition).HasColumnName("idNutritionalComposition");
             entity.Property(e => e.IdUnitMeasurement).HasColumnName("idUnitMeasurement");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
 
+            entity.HasOne(d => d.IdFoodNavigation).WithMany(p => p.FoodNutritionInfos)
+                .HasForeignKey(d => d.IdFood)
+                .HasConstraintName("foodNutritionInfo_idfood_foreign");
+
             entity.HasOne(d => d.IdNutritionalCompositionNavigation).WithMany(p => p.FoodNutritionInfos)
                 .HasForeignKey(d => d.IdNutritionalComposition)
                 .HasConstraintName("foodNutritionInfo_nutritionalComposition_foreign");
+
+            entity.HasOne(d => d.IdUnitMeasurementNavigation).WithMany(p => p.FoodNutritionInfos)
+                .HasForeignKey(d => d.IdUnitMeasurement)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("foodnutritioninfo_idunitmeasurement_foreign");
         });
 
         modelBuilder.Entity<NutritionalComposition>(entity =>
@@ -92,6 +115,20 @@ public partial class Balanced_LifeContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("item");
+        });
+
+        modelBuilder.Entity<UnitMeasurement>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__unitMeas__3213E83F0B6F18AF");
+
+            entity.ToTable("unitMeasurement");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("name");
         });
 
         OnModelCreatingPartial(modelBuilder);

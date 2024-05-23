@@ -62,3 +62,4 @@ C:\Users\FMX\Desktop\TCC\WebScrapping\WebScrapping Foods\obj\Debug\net8.0\refint
 C:\Users\FMX\Desktop\TCC\WebScrapping\WebScrapping Foods\obj\Debug\net8.0\WebScrapping Foods.pdb
 C:\Users\FMX\Desktop\TCC\WebScrapping\WebScrapping Foods\obj\Debug\net8.0\WebScrapping Foods.genruntimeconfig.cache
 C:\Users\FMX\Desktop\TCC\WebScrapping\WebScrapping Foods\obj\Debug\net8.0\ref\WebScrapping Foods.dll
+C:\Users\FMX\Desktop\TCC\WebScrapping\WebScrapping Foods\obj\Debug\net8.0\WebScrapping Foods.sourcelink.json
