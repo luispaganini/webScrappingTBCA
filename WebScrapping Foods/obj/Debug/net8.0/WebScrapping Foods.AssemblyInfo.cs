@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebScrapping Foods")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8199c0f83823d017b74c29e3a05569bfeeb7ae4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a193905127dbfea05290bf2c485d0edf4abe220a")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebScrapping Foods")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebScrapping Foods")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

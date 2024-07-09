@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using WebScrapping_Foods.Entities;
 using WebScrapping_Foods.Models;
@@ -86,8 +87,12 @@ class Program {
                         var nutritionalComposition = await dbContext.GetCompositionByNameAsync(celulas[0].InnerText.Trim());
                         var unitMeasurement = await dbContext.GetUnitMeasurementByNameAsync(celulas[1].InnerText.Trim());
 
+                        var numberFormatInfo = new NumberFormatInfo {
+                            NumberDecimalSeparator = ",",
+                            NumberGroupSeparator = "."
+                        };
                         float quantidade;
-                        if ( !float.TryParse(celulas[2].InnerText.Trim(), out quantidade) )
+                        if ( !float.TryParse(celulas[2].InnerText.Trim(), NumberStyles.Float, numberFormatInfo, out quantidade) )
                             quantidade = 0.0f;
 
                         var nutritionInfo = new FoodNutritionInfo() {
